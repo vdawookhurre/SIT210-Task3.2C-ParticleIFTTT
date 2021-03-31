@@ -1,0 +1,34 @@
+// This #include statement was automatically added by the Particle IDE.
+#include <BH1750Lib.h>
+
+
+BH1750Lib lightMeter;
+e;
+
+void setup() {
+  Serial.begin(9600);
+  lightMeter.begin(BH1750LIB_MODE_CONTINUOUSHIGHRES);
+
+}
+
+void loop() {
+  uint16_t luxvalue = lightMeter.lightLevel();
+  
+  if(luxvalue > 300)
+  {
+      Particle.publish("There_is_sunlight", "Light", PRIVATE);
+      Serial.print("Light: ");
+      Serial.print(luxvalue);
+      delay(1000);
+  }
+  else 
+  
+  {
+      Particle.publish("No_sunlight", "Dark", PRIVATE);
+      Serial.print("Light: ");
+      Serial.print(luxvalue);
+      delay(1000);
+    
+  }
+  
+}
